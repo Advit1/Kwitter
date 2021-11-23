@@ -1,22 +1,44 @@
 // Your web app's Firebase configuration
 var firebaseConfig = {
-      apiKey: "AIzaSyBczkjSYN4-Mue9qWaroiUMqaHRDs2M5Ic",
-      authDomain: "website-c55c5.firebaseapp.com",
-      databaseURL: "https://website-c55c5-default-rtdb.firebaseio.com",
-      projectId: "website-c55c5",
-      storageBucket: "website-c55c5.appspot.com",
-      messagingSenderId: "689912497099",
-      appId: "1:689912497099:web:94b2e668ce54149c06ec4e"
+      apiKey: "AIzaSyDtnDgEywiL2rL-67QZ2VW2Qoj76-eYYjI",
+      authDomain: "deletetest-132c7.firebaseapp.com",
+      databaseURL: "https://deletetest-132c7-default-rtdb.firebaseio.com",
+      projectId: "deletetest-132c7",
+      storageBucket: "deletetest-132c7.appspot.com",
+      messagingSenderId: "251442731867",
+      appId: "1:251442731867:web:eb8dd0bdc2ec1bb2dd187e"
     };
     
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-//ADD YOUR FIREBASE LINKS HERE
+    
+firebase.initializeApp(firebaseConfig);
+
+user_name = localStorage.getItem("user_name");
+
+document.getElementById("user_name").innerHTML = "Welcome " + user_name + "!";
+
+function addRoom()
+{
+      room_name = document.getElementById("room_name").value;
+      firebase.database().ref("/").child(room_name).update({
+            purpose : "Adding room name"
+      });
+      localStorage.setItem("room_name", room_name);
+      window.location = "kwitter_page.html";
+}
 
 function getData() {firebase.database().ref("/").on('value', function(snapshot) {document.getElementById("output").innerHTML = "";snapshot.forEach(function(childSnapshot) {childKey  = childSnapshot.key;
        Room_names = childKey;
       //Start code
-
+      console.log("Room Name - " + Room_names);
+      row = "<div class='room_name' id="+Room_names+" onclick='redirectToRoomName(this.id)'>#"+ Room_names +"</div><hr>";
+      document.getElementById("output").innerHTML += row;
       //End code
       });});}
 getData();
+
+function redirectToRoomName(name)
+{
+      console.log(name); 
+      localStorage.setItem("room_name", name);
+      window.location = "kwitter_page.html";
+}
