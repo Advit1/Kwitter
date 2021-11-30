@@ -9,7 +9,6 @@ var firebaseConfig = {
       appId: "1:251442731867:web:eb8dd0bdc2ec1bb2dd187e"
     };
     
-    
 firebase.initializeApp(firebaseConfig);
 
 user_name = localStorage.getItem("user_name");
@@ -41,4 +40,11 @@ function redirectToRoomName(name)
       console.log(name); 
       localStorage.setItem("room_name", name);
       window.location = "kwitter_page.html";
+}
+
+function logout()
+{
+      localStorage.removeItem("user_name");
+      localStorage.removeItem("room_name");
+      window.location = "index.html";
 }
